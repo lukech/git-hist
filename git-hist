@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Check command history and pick the right git command to re-execute.
+#
+# Version 0.1
+
+set -eux
+
+function help {
+    echo "Usage: $0 <keyword>"
+}
+
+if [ $# -ne 1 ]; then
+    help
+    exit 1
+fi
+
+ME=$(whoami)
+UNAME=$(uname -s)
+
+case ${UNAME} in
+"Darwin")
+    echo "MacOS"
+    HOME_DIR="/Users/${ME}"
+    ;;
+*)
+    echo "Linux"
+    HOME_DIR="/home/${ME}"
+    ;;
+esac
+
+HIST_FILE="${HOME_DIR}/.bash_history"
+
+cat "${HIST_FILE}" | grep '^git' | grep $1
