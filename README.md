@@ -12,6 +12,8 @@ Think about a scenario that you hope to recall a command like "git log --oneline
 
 The idea of git-hist is to improve your git command recalling exprience by reaching a match with a couple of dispersive 'keywords', without needing to follow the exact sequence the command was run before). 
 
+It is implemented by querying command history to pick the right git command to re-execute.
+
 ### Usage
 ````bash
 $ git-hist <keyword>
