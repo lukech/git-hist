@@ -19,5 +19,24 @@ It is implemented by querying command history to pick the right git command to r
 $ git-hist <keyword>
 ````
 
-### Supported Operating Systems
+## git-remove-obsolete-local-branches
+Removing obsolete local git branches that no longer exist on remote side.
+
+### Why 
+Keeping local and remote git branches in sync could be a challenge, especially when adopting UI based feature branch merge. One typical example is working on code change in a local feature branch, and then reviewing and merging the feature branch on GitHub, which makes the local feature branch obsolete.
+
+Instead of identifying and removing obsolete local branches manually each time, `git-remove-obsolete-local-branches` is to perform a prune fetch so that those obsolete local branches are marked `[: gone]`, and then query out all such branches, prompt user for confirmation before getting them removed.
+
+### Usage
+````bash
+$ git-remove-obsolete-local-branches
+The following local branches (no longer exist on the remote) will be removed:
+
+local-legacy-br
+
+Proceed? [Yy/Nn]y
+Deleted branch local-legacy-br (was f9b0115).
+````
+
+## Supported Operating Systems
 Linux & MacOS
