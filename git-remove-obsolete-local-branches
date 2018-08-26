@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 #
-# Remove those 'legacy' local git branches that are no longer exist on the remote repository 
+# Remove those 'obsolete' local git branches that are no longer exist on the remote repository 
 #
 
 # Make sure you are under a git repository
@@ -16,12 +16,12 @@ git fetch -p
 branches=$(git branch -vv | grep ': gone]' | awk '{ print $1 }')
 
 if [ -z $branches ]; then
-	echo "No legacy local branch is found - You are all good."
+	echo "No obsolete local branch is found - You are all good."
 	exit 0 
 fi
 
-echo -e "Following local branches (no longer on the remote) will be removed:\n" 
-echo $branches
+echo -e "The following local branches (no longer exist on the remote) will be removed:\n" 
+echo -e "$branches \n" 
 read -p "Proceed? [Yy/Nn]" answer
 case $answer in 
 	[Yy]* ) ;;
@@ -29,7 +29,7 @@ case $answer in
 	*) echo "Please answer yes or no."; exit 0 ;;
 esac
 
-# Recursively remove 'legacy' local branches 
+# Recursively remove 'obsolete' local branches 
 for b in $branches
 do
 	git branch -D $b
